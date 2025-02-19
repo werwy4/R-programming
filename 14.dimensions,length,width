@@ -1,0 +1,34 @@
+# 9. Performing EDA on the Iris dataset
+data("iris")
+
+# (i) Dimensions, Structure, Summary, Standard Deviation
+cat("Dimensions:", dim(iris), "\n")
+str(iris)
+summary(iris)
+apply(iris[,1:4], 2, sd)
+
+# (ii) Mean and Standard Deviation grouped by Species
+aggregate(. ~ Species, data = iris, FUN = mean)
+aggregate(. ~ Species, data = iris, FUN = sd)
+
+# (iii) Quantiles of Sepal Width and Length
+quantile(iris$Sepal.Width)
+quantile(iris$Sepal.Length)
+
+# (iv) Creating iris1 with Sepal.Length.Cate
+ique_bins <- quantile(iris$Sepal.Length, probs = seq(0, 1, length.out = 4), na.rm = TRUE)
+iris$Sepal.Length.Cate <- cut(iris$Sepal.Length, breaks = unique_bins, labels = c("Short", "Medium", "Long"))
+iris1 <- iris
+
+# (v) Average numerical values by Species and Sepal.Length.Cate
+aggregate(. ~ Species + Sepal.Length.Cate, data = iris1[, -5], FUN = mean, na.rm = TRUE)
+
+# (vi) Average mean value of numerical variables by Species and Sepal.Length.Cate
+aggregate(. ~ Species + Sepal.Length.Cate, data = iris1[, -5], FUN = mean)
+
+# (vii) Create a Pivot Table
+library(tidyr)
+pivot_table <- iris1 %>% 
+  group_by(Species, Sepal.Length.Cate) %>% 
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+print(pivot_table)
