@@ -1,0 +1,16 @@
+# 6. Working with the airquality dataset
+# Load dataset
+data("airquality")
+
+# Check if it is a data frame
+is_data_frame <- is.data.frame(airquality)
+cat("Is airquality a data frame?", is_data_frame, "\n")
+
+# Order the data frame by first and second column
+airquality <- airquality[order(airquality[,1], airquality[,2]), ]
+
+# Remove 'Solar.R' and 'Wind' columns
+airquality <- subset(airquality, select = -c(Solar.R, Wind))
+
+# Display updated data frame
+head(airquality)
