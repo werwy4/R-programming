@@ -1,0 +1,19 @@
+data_vec <- c(90, 50, 70, 80, 70, 60, 20, 30, 80, 90, 20)
+mean_val <- mean(data_vec)
+median_val <- median(data_vec)
+mode_val <- as.numeric(names(sort(table(data_vec), decreasing=TRUE))[1])
+
+print(c(mean_val, median_val, mode_val))
+
+sorted_vec <- sort(unique(data_vec), decreasing = TRUE)
+second_highest <- sorted_vec[2]
+third_lowest <- sorted_vec[length(sorted_vec) - 2]
+print(c(second_highest, third_lowest))
+
+values <- c(90,50,70,80,70,60,20,30,80,90,20)
+mean_val <- mean(values)
+median_val <- median(values)
+mode_val <- as.numeric(names(sort(table(values), decreasing = TRUE)[1]))
+
+second_highest <- sort(unique(values), decreasing = TRUE)[2]
+third_lowest <- sort(unique(values))[3]
