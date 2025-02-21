@@ -1,0 +1,22 @@
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Load ChickWeight dataset
+data("ChickWeight")
+
+# 1a. Create Box plot for "weight" grouped by "Diet"
+ggplot(ChickWeight, aes(x = factor(Diet), y = weight)) +
+  geom_boxplot(fill = "lightblue") +
+  labs(title = "Boxplot of Weight by Diet", x = "Diet", y = "Weight")
+
+# 1b. Create Histogram for "weight" for Diet = 1
+ggplot(ChickWeight %>% filter(Diet == 1), aes(x = weight)) +
+  geom_histogram(bins = 20, fill = "orange", color = "black", alpha = 0.7) +
+  labs(title = "Histogram of Weight for Diet 1", x = "Weight", y = "Frequency")
+
+# 1c. Create Scatter plot for "weight" vs "Time" grouped by Diet
+ggplot(ChickWeight, aes(x = Time, y = weight, color = factor(Diet))) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Scatter Plot of Weight vs Time Grouped by Diet", x = "Time", y = "Weight", color = "Diet")
