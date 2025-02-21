@@ -1,0 +1,13 @@
+model <- lm(weight ~ Time + Diet, data = ChickWeight)
+summary(model)
+
+
+new_data <- data.frame(Time = 10, Diet = 1)
+predicted_weight <- predict(model, new_data)
+print(predicted_weight)
+
+
+actual_weights <- ChickWeight$weight
+predicted_weights <- predict(model, ChickWeight)
+mse <- mean((actual_weights - predicted_weights)^2)
+print(mse)
